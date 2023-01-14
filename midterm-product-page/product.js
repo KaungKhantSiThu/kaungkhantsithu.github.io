@@ -91,6 +91,7 @@ function deleteProduct(index) {
 function clearTable() {
     $('#productBody').html("")
     $("#gross").html(0)
+    $("#total").html(0)
     $("#discount-footer").html(0)
     $("#vat").html(0.00)
     $("#net").html(0.00)
