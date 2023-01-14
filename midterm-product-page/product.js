@@ -9,6 +9,7 @@ $(document).ready(function () {
         //$(this).addClass("done"); 
         console.log("DONE",data)
         let gross = 0
+        let total = 0
         let totalDiscount = 0
         data = processData(data)
         for(let d in data){
@@ -16,6 +17,7 @@ $(document).ready(function () {
             products.push(data[d])
             let amount = data[d].price * data[d].quantity
             let discountedAmount = amount - data[d].discount
+            total += amount
             gross += discountedAmount
             totalDiscount += data[d].discount
             let dataStr = `<tr>
@@ -30,6 +32,7 @@ $(document).ready(function () {
             $("#data-table > tbody").append(dataStr)
         }
         //$('#customerBody').html(dataStr)
+        $("#total").html(total.toFixed(2))
         $("#gross").html(gross.toFixed(2))
         $("#discount-footer").html('-' + totalDiscount.toFixed(2))
 
@@ -99,10 +102,12 @@ function loadData() {
     let allRows = ""
     products = processData(products)
     let gross = 0
+    let total = 0
     let totalDiscount = 0
     for (let p in products) {
         let amount = products[p].price * products[p].quantity
         let discountedAmount = amount - products[p].discount
+        total += amount
         gross += discountedAmount
         totalDiscount += products[p].discount
             let row = `<tr>
@@ -119,7 +124,7 @@ function loadData() {
     }
     $('#productBody').html(allRows)
     console.log(products)
-    
+    $("#total").html(total.toFixed(2))
     $("#gross").html(gross.toFixed(2))
     $("#discount-footer").html('-' + totalDiscount.toFixed(2))
     let vat = gross * 0.07
