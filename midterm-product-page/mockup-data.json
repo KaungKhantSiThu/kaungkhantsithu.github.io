@@ -1,0 +1,26 @@
+[
+    {
+        "quantity": 3,
+        "itemName": "Product A",
+        "price": 500,
+        "discount": 100
+    }, 
+    {
+        "quantity": 5,
+        "itemName": "Product B",
+        "price": 600,
+        "discount": 0
+    },
+    {
+        "quantity": 6,
+        "itemName": "Product C",
+        "price": 5000,
+        "discount": 300
+    },
+    {
+        "quantity": 8,
+        "itemName": "Product A",
+        "price": 510,
+        "discount": 0
+    }
+]
