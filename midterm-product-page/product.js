@@ -15,7 +15,8 @@ $(document).ready(function () {
             //save the data record into local storage $("#data-table tr:last").after(dataStr)
             products.push(data[d])
             let amount = data[d].price * data[d].quantity
-            gross += amount
+            let discountedAmount = amount - data[d].discount
+            gross += discountedAmount
             totalDiscount += data[d].discount
             let dataStr = `<tr>
                 <td class="text-center"><img class='icon' src='icon-delete.png' onclick='deleteProduct("${d}")' style='width:20px;height:20px;margin-right:7px;'></td>
@@ -24,13 +25,13 @@ $(document).ready(function () {
                 <td>${data[d].price}</td>
                 <td>${data[d].discount}</td>
                 <td>${amount}</td>
-                <td>${amount - data[d].discount}</td>
+                <td>${discountedAmount}</td>
             </tr>`
             $("#data-table > tbody").append(dataStr)
         }
         //$('#customerBody').html(dataStr)
-        $("#gross").html(gross)
-        $("#discount-footer").html('-' + totalDiscount)
+        $("#gross").html(gross.toFixed(2))
+        $("#discount-footer").html('-' + totalDiscount.toFixed(2))
 
         let vat = gross * 0.07
         let net = gross + vat
@@ -101,7 +102,8 @@ function loadData() {
     let totalDiscount = 0
     for (let p in products) {
         let amount = products[p].price * products[p].quantity
-        gross += amount
+        let discountedAmount = amount - products[p].discount
+        gross += discountedAmount
         totalDiscount += products[p].discount
             let row = `<tr>
                 <td class="text-center"><img class='icon' src='icon-delete.png' onclick='deleteProduct("${p}")' style='width:20px;height:20px;margin-right:7px;'></td>
@@ -110,7 +112,7 @@ function loadData() {
                 <td>${products[p].price}</td>
                 <td>${products[p].discount}</td>
                 <td>${amount}</td>
-                <td>${amount - products[p].discount}</td>
+                <td>${discountedAmount}</td>
             </tr>`
         allRows += row
 
@@ -118,8 +120,8 @@ function loadData() {
     $('#productBody').html(allRows)
     console.log(products)
     
-    $("#gross").html(gross)
-    $("#discount-footer").html('-' + totalDiscount)
+    $("#gross").html(gross.toFixed(2))
+    $("#discount-footer").html('-' + totalDiscount.toFixed(2))
     let vat = gross * 0.07
     let net = gross + vat
     $("#vat").html(vat.toFixed(2))
